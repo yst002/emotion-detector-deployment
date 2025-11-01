@@ -13,3 +13,4 @@ dotenv
 transformers
 torch
 torchvision
+streamlit-autorefresh
