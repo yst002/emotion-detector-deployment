@@ -4,7 +4,7 @@ import cv2
 import av
 import numpy as np
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase,RTCConfiguration
 from movie import discover_movies_for_emotion, recommend_from_probs, EMO_CLASSES,show_movies
 from books import discover_books_for_emotion as discover_books
 from books import recommend_books_from_probs, show_books as show_books_list
@@ -317,11 +317,24 @@ with col1:
 
 os.makedirs("outputs", exist_ok=True)
 
+rtc_configuration = RTCConfiguration({
+    "iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]},
+        {
+            "urls": ["turn:relay1.expressturn.com:3478"],
+            "username": "efrem",
+            "credential": "efrem"
+        }
+    ]
+})
+
 ctx = webrtc_streamer(
     key="face-emotion",
     mode=WebRtcMode.SENDRECV,
+    rtc_configuration=rtc_configuration,
     video_processor_factory=FaceProcessor,
     media_stream_constraints={"video": True, "audio": False},
+    async_processing=True,
 )
 
 
