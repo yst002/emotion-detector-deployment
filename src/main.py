@@ -320,16 +320,18 @@ with col1:
 
 os.makedirs("outputs", exist_ok=True)
 
+
 rtc_configuration = RTCConfiguration({
     "iceServers": [
-        {"urls": ["stun:global.stun.twilio.com:3478?transport=udp"]},
+        {"urls": ["stun:global.stun.twilio.com:3478"]},  
         {
-            "urls": ["turn:global.turn.twilio.com:3478?transport=udp"],
-            "username": ACCOUNT_SID,    
-            "credential":AUTH_TOKEN     
+            "urls": ["turn:global.turn.twilio.com:3478"], 
+            "username": ACCOUNT_SID,        
+            "credential": AUTH_TOKEN        
         }
     ]
 })
+
 
 ctx = webrtc_streamer(
     key="face-emotion",
