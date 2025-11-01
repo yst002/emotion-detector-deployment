@@ -341,7 +341,7 @@ except Exception as e:
 ctx = webrtc_streamer(
     key="face-emotion",
     mode=WebRtcMode.SENDRECV,
-    rtc_configuration=rtc_configuration,
+    rtc_configuration=rtc_config,
     video_processor_factory=FaceProcessor,
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
