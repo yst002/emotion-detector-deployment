@@ -14,3 +14,4 @@ transformers
 torch
 torchvision
 streamlit-autorefresh
+twilio
