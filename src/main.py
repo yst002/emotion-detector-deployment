@@ -17,6 +17,9 @@ import pandas as pd
 # Correct
 from streamlit_autorefresh import st_autorefresh
 
+ACCOUNT_SID = st.secrets["TWILIO_ACCOUNT_SID"]
+AUTH_TOKEN = st.secrets["TWILIO_AUTH_TOKEN"]
+
 #  Streamlit page config 
 st.set_page_config(page_title="Face + Emotion Detection", layout="centered")
 st.title(" Real-Time Emotion Detection")
@@ -319,11 +322,11 @@ os.makedirs("outputs", exist_ok=True)
 
 rtc_configuration = RTCConfiguration({
     "iceServers": [
-        {"urls": ["stun:stun.l.google.com:19302"]},
+        {"urls": ["stun:global.stun.twilio.com:3478?transport=udp"]},
         {
-            "urls": ["turn:relay1.expressturn.com:3478"],
-            "username": "efrem",
-            "credential": "efrem"
+            "urls": ["turn:global.turn.twilio.com:3478?transport=udp"],
+            "username": ACCOUNT_SID,    
+            "credential":AUTH_TOKEN     
         }
     ]
 })
