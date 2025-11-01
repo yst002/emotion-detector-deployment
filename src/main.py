@@ -323,11 +323,14 @@ os.makedirs("outputs", exist_ok=True)
 
 rtc_configuration = RTCConfiguration({
     "iceServers": [
-        {"urls": ["stun:global.stun.twilio.com:3478"]},  
+        {"urls": ["stun:stun.metered.ca:80"]},
         {
-            "urls": ["turn:global.turn.twilio.com:3478"], 
-            "username": ACCOUNT_SID,        
-            "credential": AUTH_TOKEN        
+            "urls": [
+                "turn:turn.metered.ca:80?transport=tcp",
+                "turn:turn.metered.ca:443?transport=tcp"
+            ],
+            "username": "openrelayproject",   
+            "credential": "openrelayproject"     
         }
     ]
 })
