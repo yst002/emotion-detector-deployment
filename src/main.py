@@ -321,21 +321,9 @@ with col1:
 os.makedirs("outputs", exist_ok=True)
 
 
-# Use Twilio's API to fetch the list of STUN/TURN servers
-try:
-    from twilio.rest import Client
-    client = Client(ACCOUNT_SID, AUTH_TOKEN)
-    token = client.tokens.create()
-    # token.ice_servers is a list of dictionaries
-    rtc_config = {"iceServers": token.ice_servers}
-    
-   
-except Exception as e:
-    st.warning(f"Could not fetch Twilio STUN/TURN servers: {e}. Using public STUN only.")
-    # Fallback to public STUN server
-    rtc_config = {
-        "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
-    }
+rtc_config = {
+    "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+}
 
 
 ctx = webrtc_streamer(
