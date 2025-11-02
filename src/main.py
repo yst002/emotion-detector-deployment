@@ -321,15 +321,21 @@ with col1:
 os.makedirs("outputs", exist_ok=True)
 
 
-rtc_config = {
-    "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+rtc_configuration = {
+    "iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]},
+        {
+            "urls": ["turn:35.244.33.238:3478"],
+            "username": "appuser",
+            "credential": "strongpassword123"
+        }
+    ]
 }
-
 
 ctx = webrtc_streamer(
     key="face-emotion",
     mode=WebRtcMode.SENDRECV,
-    rtc_configuration=rtc_config,
+    rtc_configuration=rtc_configuration,
     video_processor_factory=FaceProcessor,
     media_stream_constraints={"video": True, "audio": False},
     async_processing=True,
